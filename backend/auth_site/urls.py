@@ -1,6 +1,6 @@
 """auth_site URL Configuration"""
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -23,5 +23,6 @@ urlpatterns = [
         TokenVerifyView.as_view(),
         name='token_verify'
     ),
-    path("admin/", admin.site.urls),
+    path('api/users/', include("users.urls")),
+    path('admin/', admin.site.urls),
 ]
