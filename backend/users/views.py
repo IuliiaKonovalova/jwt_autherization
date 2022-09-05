@@ -24,4 +24,7 @@ class RegisterView(APIView):
 class RetrieveUserView(APIView):
     permission_classes = [permissions.IsAuthenticated]
     def get(self, request):
-        pass
+        user = request.user
+        user = UserSerializer(user)
+
+        return Response(user.data, status=status.HTTP_200_OK)
