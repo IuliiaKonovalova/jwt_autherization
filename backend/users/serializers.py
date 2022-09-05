@@ -22,6 +22,9 @@ class UserCreateSerializer(serializers.ModelSerializer):
                   'password': serializer_error['non_field_errors']
                 }
             )
+
+        return data
+
     def create(self, validated_data):
         user = User.objects.create_user(
             first_name=validated_data['first_name'],
