@@ -9,4 +9,8 @@ node_modules/
 cloudinary_python.txt
 *.sqlite3
 db.sqlite3
-venv
+venv/
+venv/bin/
+venv/lib/
+venv/include/
+venv/pyvenv.cfg
