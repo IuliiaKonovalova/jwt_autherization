@@ -9,7 +9,6 @@ import { store } from 'store';
 
 
 const App = () => (
-  <Provider store={store}>
     <Router>
       <Routes>
         <Route path="/" element={<HomePage/>} />
@@ -18,7 +17,6 @@ const App = () => (
         <Route path="/register" element={<RegisterPage />} />
       </Routes>
     </Router>
-  </Provider>
   );
 
 export default App
