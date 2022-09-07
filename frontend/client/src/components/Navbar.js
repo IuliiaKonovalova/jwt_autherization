@@ -7,11 +7,33 @@ const Navbar = () => {
 	const { isAuthenticated } = useSelector(state => state.user);
 
 	const authLinks = (
-
+		<>
+			<li className='nav-item'>
+				<NavLink className='nav-link' to='/dashboard'>
+					Dashboard
+				</NavLink>
+			</li>
+			<li className='nav-item'>
+				<a className='nav-link' href='#!' onClick={() => dispatch(logout())}>
+					Logout
+				</a>
+			</li>
+		</>
 	);
 
 	const guestLinks = (
-
+		<>
+			<li className='nav-item'>
+				<NavLink className='nav-link' to='/login'>
+					Login
+				</NavLink>
+			</li>
+			<li className='nav-item'>
+				<NavLink className='nav-link' to='/register'>
+					Register
+				</NavLink>
+			</li>
+		</>
 	);
 
 	return (
