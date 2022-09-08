@@ -42,7 +42,21 @@ const userSlice = createSlice({
       state.registered = false
     }
   },
-  
+  extraReducers: builder => {
+    builder
+      .addCase(register.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(register.fulfilled, (state, action) => {
+        state.loading = false
+        state.registered = true
+      })
+      .addCase(register.rejected, (state, action) => {
+        state.loading = false
+        state.registered = false
+      }
+    )
+  }
 })
 
 export const { resetRegistered } = userSlice.actions
