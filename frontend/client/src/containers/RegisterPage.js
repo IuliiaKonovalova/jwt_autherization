@@ -6,7 +6,16 @@ import { useSelector, useDispatch } from 'react-redux';
 const RegisterPage = () => {
   const { register } = useSelector(state => state.user);
 
+  const [ formData, setFormData ] = useState({
+    first_name: '',
+    last_name: '',
+    email: '',
+    password: '',
+  });
 
+  const { first_name, last_name, email, password } = formData;
+
+  const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   if (register)
     return <Navigate to='/login' />;
@@ -17,15 +26,19 @@ const RegisterPage = () => {
       <form>
         <div>
           <label htmlFor='first_name'>First Name</label>
-          <input type='text' name='first_name' id='first_name' />
+          <input type='text' name='first_name' id='first_name' onChange={onChange} value={first_name}/>
         </div>
         <div>
           <label htmlFor='last_name'>Last Name</label>
-          <input type='text' name='last_name' id='last_name' />
+          <input type='text' name='last_name' id='last_name' onChange={onChange} value={last_name}/>
         </div>
         <div>
           <label htmlFor='email'>Email</label>
-          <input type='email' name='email' id='email' />
+          <input type='email' name='email' id='email' onChange={onChange} value={email}/>
+        </div>
+        <div>
+          <label htmlFor='password'>Password</label>
+          <input type='password' name='password' id='password' onChange={onChange} value={password}/>
         </div>
       </form>
     </Layout>
