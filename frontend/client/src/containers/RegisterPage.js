@@ -5,51 +5,86 @@ import { useSelector, useDispatch } from 'react-redux';
 import { register } from 'features/user';
 
 const RegisterPage = () => {
-  const dispatch = useDispatch();
-  const { register, loading } = useSelector(state => state.user);
+	const dispatch = useDispatch();
+	const { registered, loading } = useSelector(state => state.user);
 
-  const [ formData, setFormData ] = useState({
-    first_name: '',
-    last_name: '',
-    email: '',
-    password: '',
-  });
+	const [formData, setFormData] = useState({
+		first_name: '',
+		last_name: '',
+		email: '',
+		password: '',
+	});
 
-  const { first_name, last_name, email, password } = formData;
+	const { first_name, last_name, email, password } = formData;
 
-  const onChange = e => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  }
+	const onChange = e => {
+		setFormData({ ...formData, [e.target.name]: e.target.value });
+	};
 
-  const onSubmit = e => {
-    e.preventDefault();
-    dispatch(register({ first_name, last_name, email, password }));
-  }
+	const onSubmit = e => {
+		e.preventDefault();
 
+		dispatch(register({ first_name, last_name, email, password }));
+	};
 
-  if (register)
-    return <Navigate to='/login' />;
-  
-  return (
-    <Layout title='Auth Site | Register' content='Register page'>
-      <h1>Register for an Account</h1>
-      <form className="mt-5">
-        <div className="form-group">
-          <label htmlFor='first_name' className='form-label'>First Name</label>
-          <input type='text' name='first_name' id='first_name' onChange={onChange} value={first_name} className="form-control" required/>
-        </div>
-        <div className="form-group mt-3">
-          <label htmlFor='last_name' className='form-label'>Last Name</label>
-          <input type='text' name='last_name' id='last_name' onChange={onChange} value={last_name} className="form-control" required/>
-        </div>
-        <div className="form-group mt-3">
-          <label htmlFor='email' className='form-label'>Email</label>
-          <input type='email' name='email' id='email' onChange={onChange} value={email} className="form-control" required/>
-        </div>
-        <div className="form-group mt-3">
-          <label htmlFor='password' className='form-label'>Password</label>
-          <input type='password' name='password' id='password' onChange={onChange} value={password} className="form-control" required/>
-        </div>
+	if (registered) return <Navigate to='/login' />;
+
+	return (
+		<Layout title='Auth Site | Register' content='Register page'>
+			<h1>Register for an Account</h1>
+			<form className='mt-5' onSubmit={onSubmit}>
+				<div className='form-group'>
+					<label className='form-label' htmlFor='first_name'>
+						First Name
+					</label>
+					<input
+						className='form-control'
+						type='text'
+						name='first_name'
+						onChange={onChange}
+						value={first_name}
+						required
+					/>
+				</div>
+				<div className='form-group mt-3'>
+					<label className='form-label' htmlFor='last_name'>
+						Last Name
+					</label>
+					<input
+						className='form-control'
+						type='text'
+						name='last_name'
+						onChange={onChange}
+						value={last_name}
+						required
+					/>
+				</div>
+				<div className='form-group mt-3'>
+					<label className='form-label' htmlFor='email'>
+						Email
+					</label>
+					<input
+						className='form-control'
+						type='email'
+						name='email'
+						onChange={onChange}
+						value={email}
+						required
+					/>
+				</div>
+				<div className='form-group mt-3'>
+					<label className='form-label' htmlFor='password'>
+						Password
+					</label>
+					<input
+						className='form-control'
+						type='password'
+						name='password'
+						onChange={onChange}
+						value={password}
+						required
+					/>
+				</div>
 				{loading ? (
 					<div className='spinner-border text-primary' role='status'>
 						<span className='visually-hidden'>Loading...</span>
@@ -57,9 +92,9 @@ const RegisterPage = () => {
 				) : (
 					<button className='btn btn-primary mt-4'>Register</button>
 				)}
-      </form>
-    </Layout>
-  )
-}
+			</form>
+		</Layout>
+	);
+};
 
-export default RegisterPage
+export default RegisterPage;
