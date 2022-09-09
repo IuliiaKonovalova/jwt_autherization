@@ -2,8 +2,10 @@ import { useState } from 'react';
 import Layout from 'components/Layout';
 import { Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { register } from 'features/user';
 
 const RegisterPage = () => {
+  const dispatch = useDispatch();
   const { register } = useSelector(state => state.user);
 
   const [ formData, setFormData ] = useState({
@@ -15,7 +17,15 @@ const RegisterPage = () => {
 
   const { first_name, last_name, email, password } = formData;
 
-  const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const onChange = e => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+
+  const onSubmit = e => {
+    e.preventDefault();
+    dispatch(register({ first_name, last_name, email, password }));
+  }
+
 
   if (register)
     return <Navigate to='/login' />;
@@ -40,6 +50,7 @@ const RegisterPage = () => {
           <label htmlFor='password' className='form-label'>Password</label>
           <input type='password' name='password' id='password' onChange={onChange} value={password} className="form-control" required/>
         </div>
+        <button type='submit' className='btn btn-primary mt-4'>Register</button>
       </form>
     </Layout>
   )
