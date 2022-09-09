@@ -6,7 +6,7 @@ import { register } from 'features/user';
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
-  const { register } = useSelector(state => state.user);
+  const { register, loading } = useSelector(state => state.user);
 
   const [ formData, setFormData ] = useState({
     first_name: '',
@@ -50,7 +50,13 @@ const RegisterPage = () => {
           <label htmlFor='password' className='form-label'>Password</label>
           <input type='password' name='password' id='password' onChange={onChange} value={password} className="form-control" required/>
         </div>
-        <button type='submit' className='btn btn-primary mt-4'>Register</button>
+				{loading ? (
+					<div className='spinner-border text-primary' role='status'>
+						<span className='visually-hidden'>Loading...</span>
+					</div>
+				) : (
+					<button className='btn btn-primary mt-4'>Register</button>
+				)}
       </form>
     </Layout>
   )
