@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { resetRegistered } from 'features/user';
 import Layout from 'components/Layout';
 
 const LoginPage = () => {
   const dispatch = useDispatch();
 
+  const { loading } = useSelector(state => state.user);
 
 	const [formData, setFormData] = useState({
 		email: '',
