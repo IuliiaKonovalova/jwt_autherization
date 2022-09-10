@@ -6,9 +6,19 @@ import Layout from 'components/Layout';
 const LoginPage = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(resetRegistered());
-  }, []);
+
+	const [formData, setFormData] = useState({
+		email: '',
+		password: '',
+	});
+
+	useEffect(() => {
+		if (registered) dispatch(resetRegistered());
+	}, [registered]);
+
+	const { email, password } = formData;
+
+
   return (
     <Layout title='Auth Site | Login' content='Login page'>
       <h1>LoginPage</h1>
