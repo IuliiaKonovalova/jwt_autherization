@@ -1,4 +1,5 @@
 const express = require('express');
+const cookieParser = require('cookie-parser');
 const path = require('path');
 
 require('dotenv').config();
@@ -11,6 +12,7 @@ const registerRouter = require('./routes/auth/register');
 const app = express();
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.use(loginRouter);
 app.use(meRouter);
