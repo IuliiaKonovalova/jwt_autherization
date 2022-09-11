@@ -42,10 +42,14 @@ router.post('api/users/login', async(req, res) => {
           secure: process.env.NODE_ENV === 'production',
         }),
       ]);
+      return res.status(200).json({ success: 'Login successful' }); 
+    } else {
+    return res.status(apiRes.status).json(data);
     }
-    return res.status(200).json({ success: 'Login successful' }); 
   } catch (err) {
-      
+      return res.status(500).json({
+        error: 'Something went wrong when logging in',
+      });
     }
 });
 
