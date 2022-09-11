@@ -3,12 +3,17 @@ const path = require('path');
 
 require('dotenv').config();
 
+const loginRouter = require('./routes/auth/login');
+const meRouter = require('./routes/auth/me');
 const registerRouter = require('./routes/auth/register');
+
 
 const app = express();
 
 app.use(express.json());
 
+app.use(loginRouter);
+app.use(meRouter);
 app.use(registerRouter);
 
 app.use(express.static('client/build'));
