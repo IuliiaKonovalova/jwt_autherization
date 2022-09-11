@@ -34,6 +34,37 @@ export const register = createAsyncThunk(
 	}
 );
 
+export const login = createAsyncThunk(
+	'users/login',
+	async ({ email, password }, thunkAPI) => {
+		const body = JSON.stringify({
+			email,
+			password,
+		});
+
+		try {
+			const res = await fetch('/api/users/login', {
+				method: 'POST',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+				},
+				body,
+			});
+
+			const data = await res.json();
+
+			if (res.status === 201) {
+				return data;
+			} else {
+				return thunkAPI.rejectWithValue(data);
+			}
+		} catch (err) {
+			return thunkAPI.rejectWithValue(err.response.data);
+		}
+	}
+);
+
 const initialState = { 
   isAuthenticated: false,
   user: null,
