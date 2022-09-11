@@ -1,4 +1,5 @@
 const express = require('express');
+const cookie = require('cookie');
 const fetch = (...args) =>
 	import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
@@ -25,6 +26,22 @@ router.post('api/users/login', async(req, res) => {
     const data = await apiRes.json();
 
     if (apiRes.status === 200) {
+      res.setHeader('Set-Cookie', [
+        cookie.serialize('access_token', data.access, {
+          httpOnly: true,
+          maxAge: 60 * 30,
+          path: '/api/',
+          sameSite: 'strict',
+          secure: process.env.NODE_ENV === 'production',
+        }),
+        cookie.serialize('refresh_token', data.refresh, {
+          httpOnly: true,
+          maxAge: 60 * 60 * 24,
+          path: '/api/',
+          sameSite: 'strict',
+          secure: process.env.NODE_ENV === 'production',
+        }),
+      ]);
     }
     return res.status(200).json({ success: 'Login successful' }); 
   } catch (err) {
