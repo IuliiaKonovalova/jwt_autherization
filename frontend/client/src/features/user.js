@@ -55,6 +55,7 @@ export const login = createAsyncThunk(
 			const data = await res.json();
 
 			if (res.status === 201) {
+        const { dispatch } = thunkAPI;
 				return data;
 			} else {
 				return thunkAPI.rejectWithValue(data);
@@ -91,8 +92,17 @@ const userSlice = createSlice({
       })
       .addCase(register.rejected, (state, action) => {
         state.loading = false
-      }
-    )
+      })
+      .addCase(login.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.loading = false
+        state.isAuthenticated = true
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.loading = false
+      })
   }
 })
 
