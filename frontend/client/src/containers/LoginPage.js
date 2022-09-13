@@ -27,7 +27,8 @@ const LoginPage = () => {
 	const onSubmit = e => {
 		e.preventDefault();
 
-		
+    dispatch(login({ email, password }));
+
 	};
 
   return (
