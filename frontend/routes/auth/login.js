@@ -27,14 +27,14 @@ router.post('/api/users/login', async(req, res) => {
 
     if (apiRes.status === 200) {
       res.setHeader('Set-Cookie', [
-        cookie.serialize('access_token', data.access, {
+        cookie.serialize('access', data.access, {
           httpOnly: true,
           maxAge: 60 * 30,
           path: '/api/',
           sameSite: 'strict',
           secure: process.env.NODE_ENV === 'production',
         }),
-        cookie.serialize('refresh_token', data.refresh, {
+        cookie.serialize('refresh', data.refresh, {
           httpOnly: true,
           maxAge: 60 * 60 * 24,
           path: '/api/',
