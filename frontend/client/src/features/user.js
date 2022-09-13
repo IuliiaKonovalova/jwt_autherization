@@ -34,6 +34,27 @@ export const register = createAsyncThunk(
 	}
 );
 
+const getUser = createAsyncThunk('users/me', async (_, thunkAPI) => {
+  try {
+    const res = await fetch('/api/users/me', {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+
+    const data = await res.json();
+    if (res.status === 200) {
+      return data;
+    } else {
+      return thunkAPI.rejectWithValue(data);
+    }
+  } catch (err) {
+    return thunkAPI.rejectWithValue(err.response.data);
+  }
+
+});
+
 export const login = createAsyncThunk(
 	'users/login',
 	async ({ email, password }, thunkAPI) => {
@@ -56,6 +77,7 @@ export const login = createAsyncThunk(
 
 			if (res.status === 201) {
         const { dispatch } = thunkAPI;
+        dispatch(getUser());
 				return data;
 			} else {
 				return thunkAPI.rejectWithValue(data);
