@@ -105,36 +105,36 @@ const userSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(register.pending, (state, action) => {
-        state.loading = true
-      })
-      .addCase(register.fulfilled, (state, action) => {
-        state.loading = false
-        state.registered = true
-      })
-      .addCase(register.rejected, (state, action) => {
-        state.loading = false
-      })
-      .addCase(login.pending, (state, action) => {
-        state.loading = true
-      })
-      .addCase(login.fulfilled, (state, action) => {
-        state.loading = false
-        state.isAuthenticated = true
-      })
-      .addCase(login.rejected, (state, action) => {
-        state.loading = false
-      })
-      .addCase(getUser.pending, (state, action) => {
-        state.loading = true
-      })
-      .addCase(getUser.fulfilled, (state, action) => {
-        state.loading = false
-        state.user = action.payload
-      })
-      .addCase(getUser.rejected, (state, action) => {
-        state.loading = false
-      })
+    .addCase(register.pending, state => {
+      state.loading = true;
+    })
+    .addCase(register.fulfilled, state => {
+      state.loading = false;
+      state.registered = true;
+    })
+    .addCase(register.rejected, state => {
+      state.loading = false;
+    })
+    .addCase(login.pending, state => {
+      state.loading = true;
+    })
+    .addCase(login.fulfilled, state => {
+      state.loading = false;
+      state.isAuthenticated = true;
+    })
+    .addCase(login.rejected, state => {
+      state.loading = false;
+    })
+    .addCase(getUser.pending, state => {
+      state.loading = true;
+    })
+    .addCase(getUser.fulfilled, (state, action) => {
+      state.loading = false;
+      state.user = action.payload;
+    })
+    .addCase(getUser.rejected, state => {
+      state.loading = false;
+    })
 
   }
 })
