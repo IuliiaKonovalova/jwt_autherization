@@ -125,6 +125,17 @@ const userSlice = createSlice({
       .addCase(login.rejected, (state, action) => {
         state.loading = false
       })
+      .addCase(getUser.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.loading = false
+        state.user = action.payload
+      })
+      .addCase(getUser.rejected, (state, action) => {
+        state.loading = false
+      })
+
   }
 })
 
