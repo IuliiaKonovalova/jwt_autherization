@@ -5,7 +5,7 @@ const fetch = (...args) =>
 
 const router = express.Router();
 
-router.post('api/users/login', async(req, res) => {
+router.post('/api/users/login', async(req, res) => {
   const { email, password } = req.body;
 
   const body = JSON.stringify({
