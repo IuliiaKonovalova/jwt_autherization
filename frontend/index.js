@@ -4,7 +4,9 @@ const path = require('path');
 
 require('dotenv').config();
 
+
 const loginRouter = require('./routes/auth/login');
+const logoutRouter = require('./routes/auth/logout');
 const meRouter = require('./routes/auth/me');
 const registerRouter = require('./routes/auth/register');
 
@@ -14,7 +16,9 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
+
 app.use(loginRouter);
+app.use(logoutRouter);
 app.use(meRouter);
 app.use(registerRouter);
 
