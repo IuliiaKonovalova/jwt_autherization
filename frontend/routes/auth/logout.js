@@ -1,23 +1,30 @@
-//  Logout logic for the express server
+//  Logout route handler logic
 const express = require('express');
+// cookie library
 const cookie = require('cookie');
-const fetch = (...args) =>
-	import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
 const router = express.Router();
 
+// Logout route handler
 router.get('/api/users/logout', (req, res) => {
 
+  // No async await because we are not making any API calls
+  // As it just needs to clear the cookies
+  // Empty cookies with expire date in the past
   res.setHeader('Set-Cookie', [
+    // Access cookie
     cookie.serialize('access', '', {
       httpOnly: true,
+      // Expire date in the past
       expires: new Date(0),
       path: '/api/',
       sameSite: 'strict',
       secure: process.env.NODE_ENV === 'production',
     }),
+    // Refresh cookie
     cookie.serialize('refresh', '', {
       httpOnly: true,
+      // Expire date in the past
       expires: new Date(0),
       path: '/api/',
       sameSite: 'strict',
