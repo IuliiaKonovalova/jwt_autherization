@@ -35,24 +35,24 @@ export const register = createAsyncThunk(
 );
 
 const getUser = createAsyncThunk('users/me', async (_, thunkAPI) => {
-  try {
-    const res = await fetch('/api/users/me', {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-      },
-    });
+	try {
+		const res = await fetch('/api/users/me', {
+			method: 'GET',
+			headers: {
+				Accept: 'application/json',
+			},
+		});
 
-    const data = await res.json();
-    if (res.status === 200) {
-      return data;
-    } else {
-      return thunkAPI.rejectWithValue(data);
-    }
-  } catch (err) {
-    return thunkAPI.rejectWithValue(err.response.data);
-  }
+		const data = await res.json();
 
+		if (res.status === 200) {
+			return data;
+		} else {
+			return thunkAPI.rejectWithValue(data);
+		}
+	} catch (err) {
+		return thunkAPI.rejectWithValue(err.response.data);
+	}
 });
 
 export const login = createAsyncThunk(
@@ -75,9 +75,41 @@ export const login = createAsyncThunk(
 
 			const data = await res.json();
 
-			if (res.status === 201) {
-        const { dispatch } = thunkAPI;
-        dispatch(getUser());
+			if (res.status === 200) {
+				const { dispatch } = thunkAPI;
+
+				dispatch(getUser());
+
+				return data;
+			} else {
+				return thunkAPI.rejectWithValue(data);
+			}
+		} catch (err) {
+			return thunkAPI.rejectWithValue(err.response.data);
+		}
+	}
+);
+
+// Logout action creator
+export const logout = createAsyncThunk(
+	'users/logout',
+  // no arguments in this case
+	async (_, thunkAPI) => {
+
+		try {
+			const res = await fetch('/api/users/logout', {
+				method: 'GET',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+				},
+				body,
+			});
+
+			const data = await res.json();
+
+			if (res.status === 200) {
+
 				return data;
 			} else {
 				return thunkAPI.rejectWithValue(data);
