@@ -5,9 +5,10 @@ import { resetRegistered, login } from 'features/user';
 import Layout from 'components/Layout';
 
 const LoginPage = () => {
-  const dispatch = useDispatch();
-
-  const { loading, isAuthenticated, registered } = useSelector(state => state.user);
+	const dispatch = useDispatch();
+	const { loading, isAuthenticated, registered } = useSelector(
+		state => state.user
+	);
 
 	const [formData, setFormData] = useState({
 		email: '',
@@ -20,20 +21,21 @@ const LoginPage = () => {
 
 	const { email, password } = formData;
 
-  const onChange = e => {
+	const onChange = e => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 	};
 
 	const onSubmit = e => {
 		e.preventDefault();
 
-    dispatch(login({ email, password }));
-
+		dispatch(login({ email, password }));
 	};
 
-  return (
-    <Layout title='Auth Site | Login' content='Login page'>
-      <h1>Log into your Account</h1>
+	if (isAuthenticated) return <Navigate to='/dashboard' />;
+
+	return (
+		<Layout title='Auth Site | Login' content='Login page'>
+			<h1>Log into your Account</h1>
 			<form className='mt-5' onSubmit={onSubmit}>
 				<div className='form-group'>
 					<label className='form-label' htmlFor='email'>
@@ -69,8 +71,8 @@ const LoginPage = () => {
 					<button className='btn btn-primary mt-4'>Login</button>
 				)}
 			</form>
-    </Layout>
-  )
-}
+		</Layout>
+	);
+};
 
-export default LoginPage
+export default LoginPage;
