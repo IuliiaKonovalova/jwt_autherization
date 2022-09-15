@@ -103,7 +103,6 @@ export const logout = createAsyncThunk(
 					Accept: 'application/json',
 					'Content-Type': 'application/json',
 				},
-				body,
 			});
 
 			const data = await res.json();
@@ -167,7 +166,17 @@ const userSlice = createSlice({
     .addCase(getUser.rejected, state => {
       state.loading = false;
     })
-
+    .addCase(logout.pending, state => {
+      state.loading = true;
+    })
+    .addCase(logout.fulfilled, state => {
+      state.loading = false;
+      state.isAuthenticated = false;
+      state.user = null;
+    })
+    .addCase(logout.rejected, state => {
+      state.loading = false;
+    })
   }
 })
 
