@@ -1,5 +1,6 @@
-# jwt_autherization ( jason webtoken autherization )
+# jwt_autherization ( json webtoken autherization )
 
+This code based on the tutorials created by [Bryan Dunn](https://www.youtube.com/channel/UCf_Y89gbkB1bJGkmqiQIAnQ)
 
 
 ## Virtual environment
