@@ -3,9 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logout } from 'features/user';
 
 const Navbar = () => {
+
 	const dispatch = useDispatch();
 	const { isAuthenticated } = useSelector(state => state.user);
 
+  // If user is authenticated, show logout button and dashboard link
 	const authLinks = (
 		<>
 			<li className='nav-item'>
@@ -21,6 +23,7 @@ const Navbar = () => {
 		</>
 	);
 
+  // If user is not authenticated, show login and register links
 	const guestLinks = (
 		<>
 			<li className='nav-item'>
@@ -60,6 +63,7 @@ const Navbar = () => {
 								Home
 							</NavLink>
 						</li>
+            {/* add the following links according to authentication status */}
 						{isAuthenticated ? authLinks : guestLinks}
 					</ul>
 				</div>
