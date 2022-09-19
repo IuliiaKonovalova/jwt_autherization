@@ -4,6 +4,9 @@ const fetch = (...args) =>
 
 const router = express.Router();
 
+//route handler for express to handle requests to /api/users/login
+// endpoint: /api/users/register
+// will make a AJAX call to the backend to register a user
 router.post('/api/users/register', async (req, res) => {
 	const { first_name, last_name, email, password } = req.body;
 
@@ -15,7 +18,8 @@ router.post('/api/users/register', async (req, res) => {
 	});
 
 	try {
-    console.log('body', body);
+    // on 8000
+    // send request to backend
 		const apiRes = await fetch(`${process.env.API_URL}/api/users/register`, {
 			method: 'POST',
 			headers: {
