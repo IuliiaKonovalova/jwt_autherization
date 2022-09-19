@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-
+// register action creator
 export const register = createAsyncThunk(
 	'users/register',
 	async ({ first_name, last_name, email, password }, thunkAPI) => {
@@ -12,6 +12,8 @@ export const register = createAsyncThunk(
 		});
 
 		try {
+      // call to 5000
+      // hit express route
 			const res = await fetch('/api/users/register', {
 				method: 'POST',
 				headers: {
@@ -34,6 +36,7 @@ export const register = createAsyncThunk(
 	}
 );
 
+// get user action creator
 const getUser = createAsyncThunk('users/me', async (_, thunkAPI) => {
 	try {
 		const res = await fetch('/api/users/me', {
@@ -55,6 +58,7 @@ const getUser = createAsyncThunk('users/me', async (_, thunkAPI) => {
 	}
 });
 
+// login action creator
 export const login = createAsyncThunk(
 	'users/login',
 	async ({ email, password }, thunkAPI) => {
@@ -134,6 +138,7 @@ const userSlice = createSlice({
       state.registered = false
     }
   },
+  // accept other types outside of the slice
   extraReducers: builder => {
     builder
     .addCase(register.pending, state => {
