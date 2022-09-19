@@ -1,7 +1,16 @@
 import { userSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 import Layout from 'components/Layout';
 
+
+
 const DashboardPage = () => {
+
+  const { isAuthenticated, user, loading } = userSelector(state => state.user);
+
+  if (!isAuthenticated && !loading && user === null )
+    return <Navigate to='/login' />;
+  
   return (
     <Layout title='Auth Site | Dashboard' content='Dashboard page'>
       {/* check the status */}
