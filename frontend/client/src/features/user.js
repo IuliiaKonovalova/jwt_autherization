@@ -94,6 +94,32 @@ export const login = createAsyncThunk(
 	}
 );
 
+// verification action creator
+export const checkAuth = createAsyncThunk('users/verify', async (_, thunkAPI) => {
+  try {
+    const res = await fetch('/api/users/verify', {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+
+    const data = await res.json();
+
+    if (res.status === 200) {
+      const { dispatch } = thunkAPI;
+
+      dispatch(getUser());
+
+      return data;
+    } else {
+      return thunkAPI.rejectWithValue(data);
+    }
+  } catch (err) {
+    return thunkAPI.rejectWithValue(err.response.data);
+  }
+})
+
 // Logout action creator
 export const logout = createAsyncThunk(
 	'users/logout',
