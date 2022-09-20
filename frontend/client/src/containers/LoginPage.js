@@ -5,8 +5,10 @@ import { resetRegistered, login } from 'features/user';
 import Layout from 'components/Layout';
 
 const LoginPage = () => {
+
 	const dispatch = useDispatch();
-	const { loading, isAuthenticated, registered } = useSelector(
+  // from the store, get the user state
+  const { loading, isAuthenticated, registered } = useSelector(
 		state => state.user
 	);
 
@@ -16,6 +18,7 @@ const LoginPage = () => {
 	});
 
 	useEffect(() => {
+    // check if user is registered and reset registered state
 		if (registered) dispatch(resetRegistered());
 	}, [registered]);
 
@@ -31,6 +34,7 @@ const LoginPage = () => {
 		dispatch(login({ email, password }));
 	};
 
+  // if user is authenticated, redirect to dashboard
 	if (isAuthenticated) return <Navigate to='/dashboard' />;
 
 	return (
