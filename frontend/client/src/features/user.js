@@ -197,6 +197,16 @@ const userSlice = createSlice({
     .addCase(getUser.rejected, state => {
       state.loading = false;
     })
+    .addCase(checkAuth.pending, state => {
+      state.loading = true;
+    })
+    .addCase(checkAuth.fulfilled, state => {
+      state.loading = false;
+      state.isAuthenticated = true;
+    })
+    .addCase(checkAuth.rejected, state => {
+      state.loading = false;
+    })
     .addCase(logout.pending, state => {
       state.loading = true;
     })
